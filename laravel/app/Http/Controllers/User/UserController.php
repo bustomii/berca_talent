@@ -4,6 +4,7 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\User;
 
 class UserController extends Controller
 {
@@ -14,6 +15,7 @@ class UserController extends Controller
 
     public function store(Request $request)
     {
+    
         $request->validate([
             'name' => 'required',
             'email' => 'required|email',
@@ -23,13 +25,6 @@ class UserController extends Controller
         $user = User::create($request->all());
 
         return redirect()->route('users.index');
-    }
-
-    public function edit(User $user)
-    {
-        return inertia('User/Edit', [
-            'user' => $user,
-        ]);
     }
 
     public function update(Request $request, User $user)
@@ -47,6 +42,14 @@ class UserController extends Controller
     public function destroy(User $user)
     {
         $user->delete();
+
+        return redirect()->route('users.index');
+    }
+
+    // user active
+    public function active(User $user)
+    {
+        $user->update(['is_locked' => false]);
 
         return redirect()->route('users.index');
     }
