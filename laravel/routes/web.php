@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\User\UserController;
 use App\Http\Controllers\Office\OfficeController;
 use App\Http\Controllers\Customer\CustomerController;
-use App\Http\Controllers\RajaOngkir\RajaOngkirController;
+use App\Http\Controllers\Address\AddressController;
 use Inertia\Inertia;
 
 Route::get('/', function () {
@@ -42,11 +42,10 @@ Route::middleware(['auth', 'access.pages'])->group(function () {
         Route::get('/data', [CustomerController::class, 'data'])->name('customers.data');
     });
 
-    // rajaongkir
-    Route::prefix('rajaongkir')->group(function () {
-        Route::get('/province', [RajaOngkirController::class, 'province'])->name('rajaongkir.province');
-        Route::get('/city/{province}', [RajaOngkirController::class, 'city'])->name('rajaongkir.city');
-        Route::get('/district/{city}', [RajaOngkirController::class, 'district'])->name('rajaongkir.district');
+    Route::prefix('address')->group(function () {
+        Route::get('/province', [AddressController::class, 'province'])->name('rajaongkir.province');
+        Route::get('/city/{province}', [AddressController::class, 'city'])->name('rajaongkir.city');
+        Route::get('/district/{city}', [AddressController::class, 'district'])->name('rajaongkir.district');
     });
 });
 

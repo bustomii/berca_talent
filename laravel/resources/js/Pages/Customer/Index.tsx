@@ -68,8 +68,8 @@ export default function CustomerComponent({ auth, offices, developer, supervisor
     const [city, setCity] = useState<DataCity[]>([]);
     const [district, setDistrict] = useState<DataDistrict[]>([]);
     useEffect(() => {
-        GetData('/rajaongkir/province').then((data) => {
-            setProvince(data.rajaongkir.results);
+        GetData('/address/province').then((data) => {
+            setProvince(data);
         });
     }, [])
 
@@ -87,12 +87,12 @@ export default function CustomerComponent({ auth, offices, developer, supervisor
     const OpenEditModal = (data: DataCustomer) => {
         setOpenModal(true);
         setFormState(data);
-        GetData('/rajaongkir/city/' + data.province_id).then((data) => {
+        GetData('/address/city/' + data.province_id).then((data) => {
             setCity(data.rajaongkir.results);
             setIsLoading(false);
         });
 
-        GetData('/rajaongkir/district/' + data.city_id).then((data) => {
+        GetData('/address/district/' + data.city_id).then((data) => {
             setDistrict(data.rajaongkir.results);
             setIsLoading(false);
         });
@@ -364,8 +364,8 @@ export default function CustomerComponent({ auth, offices, developer, supervisor
                                     <select
                                         value={formState.province_id}
                                         onChange={(e) => {
-                                            GetData('/rajaongkir/city/' + e.target.value).then((data) => {
-                                                setCity(data.rajaongkir.results);
+                                            GetData('/address/city/' + e.target.value).then((data) => {
+                                                setCity(data);
                                                 setIsLoading(false);
                                             });
 
@@ -377,7 +377,7 @@ export default function CustomerComponent({ auth, offices, developer, supervisor
                                         className="focus:outline-none focus:ring-0 focus:border-indigo-500 border-gray-300 py-3 px-4 rounded text-wrap text-gray-900 text-xs font-semibold bg-opacity-75 w-full">
                                         <option value="">Select Province</option>
                                         {province.map((item, index) => {
-                                            return <option key={index} value={item.province_id}>{item.province}</option>
+                                            return <option key={index} value={item.id}>{item.name}</option>
                                         })}
                                     </select>
                                 </div>
@@ -389,8 +389,8 @@ export default function CustomerComponent({ auth, offices, developer, supervisor
                                     <select
                                         value={formState.city_id}
                                         onChange={(e) => {
-                                            GetData('/rajaongkir/district/' + e.target.value).then((data) => {
-                                                setDistrict(data.rajaongkir.results);
+                                            GetData('/address/district/' + e.target.value).then((data) => {
+                                                setDistrict(data);
                                                 setIsLoading(false);
                                             });
 
@@ -402,7 +402,7 @@ export default function CustomerComponent({ auth, offices, developer, supervisor
                                         className="focus:outline-none focus:ring-0 focus:border-indigo-500 border-gray-300 py-3 px-4 rounded text-wrap text-gray-900 text-xs font-semibold bg-opacity-75 w-full">
                                         <option value="">Select City</option>
                                         {city.map((item, index) => {
-                                            return <option key={index} value={item.city_id}>{item.city_name}</option>
+                                            return <option key={index} value={item.id}>{item.name}</option>
                                         })}
                                     </select>
                                 </div>
@@ -422,7 +422,7 @@ export default function CustomerComponent({ auth, offices, developer, supervisor
                                         className="focus:outline-none focus:ring-0 focus:border-indigo-500 border-gray-300 py-3 px-4 rounded text-wrap text-gray-900 text-xs font-semibold bg-opacity-75 w-full">
                                         <option value="">Select City</option>
                                         {district.map((item, index) => {
-                                            return <option key={index} value={item.subdistrict_id}>{item.subdistrict_name}</option>
+                                            return <option key={index} value={item.id}>{item.name}</option>
                                         })}
                                     </select>
                                 </div>

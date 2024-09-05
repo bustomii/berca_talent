@@ -75,26 +75,20 @@ export interface Pivot {
 }
 
 export interface DataProvince {
-    province_id: string;
-    province:    string;
+    id: string;
+    name:    string;
 }
 
 export interface DataCity {
-    city_id:     string;
+    id:     string;
     province_id: string;
-    province:    string;
-    type:        string;
-    city_name:   string;
-    postal_code: string;
+    name:   string;
 }
 
 export interface DataDistrict {
-    subdistrict_id:   string;
-    province_id:      string;
-    province:         string;
-    city_id:          string;
-    city:             string;
-    subdistrict_name: string;
+    id: string;
+    city_id: string;
+    name: string;
 }
 
 export interface DataCustomer {
