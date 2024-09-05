@@ -21,7 +21,8 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'is_locked'
+        'is_locked',
+        'office_id',
     ];
 
     /**
@@ -45,5 +46,13 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    // with roles
+    protected $with = ['roles', 'office'];
+
+    public function office()
+    {
+        return $this->belongsTo(Office::class);
     }
 }

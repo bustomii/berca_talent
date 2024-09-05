@@ -22,6 +22,7 @@ Route::middleware('auth')->group(function () {
         Route::post('/', [UserController::class, 'store'])->name('users.store');
         Route::put('/{user}', [UserController::class, 'update'])->name('users.update');
         Route::delete('/{user}', [UserController::class, 'destroy'])->name('users.destroy');
+        Route::get('/data', [UserController::class, 'data'])->name('users.data');
     });
     
     Route::prefix('offices')->group(function () {
@@ -29,6 +30,7 @@ Route::middleware('auth')->group(function () {
         Route::post('/', [OfficeController::class, 'store'])->name('offices.store');
         Route::put('/{office}', [OfficeController::class, 'update'])->name('offices.update');
         Route::delete('/{office}', [OfficeController::class, 'destroy'])->name('offices.destroy');
+        Route::get('/data', [OfficeController::class, 'data'])->name('offices.data');
     });
 
     Route::prefix('customers')->group(function () {
