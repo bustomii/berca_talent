@@ -5,12 +5,18 @@ namespace App\Http\Controllers\Customer;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Customer;
+use Illuminate\Support\Facades\Auth;
+use App\Models\Office;
 
 class CustomerController extends Controller
 {
     public function index()
     {
-        return inertia('Customer/Index');
+        return inertia('Customer/Index', [
+            'cs' => Auth::user()->hasRole('CS') ? true : false,
+            'supervisor' => Auth::user()->hasRole('SUPERVISOR') ? true : false,
+            'offices' => Office::get(),
+        ]);
     }
 
     public function store(Request $request)
@@ -24,12 +30,12 @@ class CustomerController extends Controller
             'occupation' => 'required',
             'address' => 'required',
             'deposit_nominal' => 'required',
-            'status' => 'required',
         ]);
 
+        $request->merge(['status' => 'Menunggu Approval']);
         $customer = Customer::create($request->all());
 
-        return redirect()->route('customers.index');
+        return response()->json(['message' => 'Created!']);
     }
 
     public function update(Request $request, Customer $customer)
@@ -48,14 +54,14 @@ class CustomerController extends Controller
 
         $customer->update($request->all());
 
-        return redirect()->route('customers.index');
+        return response()->json(['message' => 'Updated!']);
     }
 
     public function destroy(Customer $customer)
     {
         $customer->delete();
 
-        return redirect()->route('customers.index');
+        return response()->json(['message' => 'Deleted!']);
     }
 
 
@@ -66,7 +72,27 @@ class CustomerController extends Controller
             'status' => 'Disetujui',
         ]);
 
-        return redirect()->route('customers.index');
+        return response()->json(['message' => 'Disetujui!']);
     }
-            
+    
+    // data
+    public function data(Request $request)
+    {
+        $offset = $request->offset;
+        $search = $request->search;        
+        $sorting = $request->sorting;
+        if($sorting) {
+            $dataSorting = explode(':', $sorting);
+            $data = Customer::orderBy($dataSorting[0], $dataSorting[1]);
+        }else{
+            $data = Customer::orderBy('id', 'desc');
+        }
+
+        if ($search) {
+            $data->where('name', 'like', '%' . $search . '%');
+        }
+
+        $data = $data->paginate(10, ['*'], 'offset', $offset)->onEachSide(0);
+        return response()->json($data);
+    }
 }

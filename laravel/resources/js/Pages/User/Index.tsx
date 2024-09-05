@@ -208,9 +208,9 @@ export default function UsersComponent({ auth, offices, roles }: PageProps) {
     return (
         <AuthenticatedLayout
             user={auth.user}
-            header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">Manage Office's</h2>}
+            header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">Manage Users's</h2>}
         >
-            <Head title="Manage Office's" />
+            <Head title="Manage Users's" />
 
             <div className="py-5">
                 <div className="max-w-7xl mx-auto sm:px-5 lg:px-5">
@@ -224,7 +224,7 @@ export default function UsersComponent({ auth, offices, roles }: PageProps) {
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
                                             <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
                                         </svg>
-                                        Add Office
+                                        Add Users
                                     </button>
                                     <div>
                                         <input
@@ -337,7 +337,7 @@ export default function UsersComponent({ auth, offices, roles }: PageProps) {
 
                                 </div>
                             </div>
-                            {errors && errors.email && <div className="text-red-500 text-xs font-semibold">{errors.email}</div>}
+                            {errors && errors.password && <div className="text-red-500 text-xs font-semibold">{errors.password}</div>}
                             <div className='flex gap-2'>
                                 <div className='space-y-1 w-full'>
                                     <label className="text-gray-900 text-sm font-semibold">Is Locked</label>

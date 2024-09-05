@@ -70,3 +70,46 @@ export interface Pivot {
     model_id:   number;
     role_id:    number;
 }
+
+export interface DataProvince {
+    province_id: string;
+    province:    string;
+}
+
+export interface DataCity {
+    city_id:     string;
+    province_id: string;
+    province:    string;
+    type:        string;
+    city_name:   string;
+    postal_code: string;
+}
+
+export interface DataDistrict {
+    subdistrict_id:   string;
+    province_id:      string;
+    province:         string;
+    city_id:          string;
+    city:             string;
+    subdistrict_name: string;
+}
+
+export interface DataCustomer {
+    id: number;
+    office_id: number;
+    name: string;
+    place_of_birth: string;
+    date_of_birth: string;
+    gender: string;
+    occupation: string;
+    province_id: string;
+    city_id: string;
+    district_id: string;
+    address: string;
+    rt: string;
+    rw: string;
+    deposit_nominal: string;
+    status: string;
+    created_at: string;
+    updated_at: string;   
+}

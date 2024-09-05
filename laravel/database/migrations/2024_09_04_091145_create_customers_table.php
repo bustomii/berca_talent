@@ -19,7 +19,12 @@ return new class extends Migration
             $table->date('date_of_birth');
             $table->enum('gender', ['Laki-laki', 'Perempuan']);
             $table->string('occupation');
+            $table->integer('province_id');
+            $table->integer('city_id');
+            $table->integer('district_id');
             $table->string('address');
+            $table->string('rt');
+            $table->string('rw');
             $table->decimal('deposit_nominal', 10, 2);
             $table->enum('status', ['Menunggu Approval', 'Disetujui']);
             $table->timestamps();
