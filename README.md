@@ -15,3 +15,34 @@ go run main.go
 - PUT /stocks/:id
 - DELETE /stocks/:id
 
+
+
+#Laravel 
+<!-- how to run project -->
+
+## How to run project
+```bash
+php artisan serve
+```
+
+## API
+- GET /address/province
+- GET /address/city/{province}
+- GET /address/district/{city}
+- GET /address/subdistrict/{district}
+
+
+#React
+<!-- how to run project -->
+
+## How to run project
+```bash
+npm start
+```
+
+
+## user & password
+```bash
+- Email: bustomi.xcvi@gmail.com
+- Password: 12345678
+```
