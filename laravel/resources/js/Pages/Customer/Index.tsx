@@ -7,7 +7,7 @@ import { HEADER_DEFAULT } from '@/Constants';
 import Modal from '@/Components/Modal';
 import axios from 'axios';
 
-export default function CustomerComponent({ auth, offices, cs, supervisor }: PageProps) {
+export default function CustomerComponent({ auth, offices, developer, supervisor }: PageProps) {
     const columns: ColumnsDataTable[] = [
         {
             name: 'ID',
@@ -24,6 +24,18 @@ export default function CustomerComponent({ auth, offices, cs, supervisor }: Pag
         {
             name: 'Address',
             selector: 'address',
+            sortable: true,
+            width: "200px"
+        },
+        {
+            name: 'Deposit',
+            selector: 'deposit_nominal',
+            sortable: true,
+            width: "200px"
+        },
+        {
+            name: 'status',
+            selector: 'status',
             sortable: true,
             width: "200px"
         }, {
@@ -112,6 +124,8 @@ export default function CustomerComponent({ auth, offices, cs, supervisor }: Pag
         const newData = data.length > 0 ? data.map((item: any, index) => {
             return {
                 ...item,
+                status: <div className="flex gap-1 justify-center text-center w-full">{item.status}</div>,
+                deposit_nominal: <div className="flex gap-1 justify-end w-full">{formatRupiah(item.deposit_nominal.toString(), 'Rp. ')}</div>,
                 action: <div className="flex gap-1 justify-center w-full">
                     <button className="bg-black bg-opacity-80 py-1 px-2 rounded text-white text-xs font-semibold"
                         onClick={() => {
@@ -459,7 +473,7 @@ export default function CustomerComponent({ auth, offices, cs, supervisor }: Pag
                                 </div>
                             </div>
                             {errors && errors.deposit_nominal && <div className="text-red-500 text-xs font-semibold">{errors.deposit_nominal}</div>}
-                            {supervisor &&
+                            {(supervisor || developer) &&
                                 <div className='flex gap-2'>
                                     <div className='space-y-1 w-full'>
                                         <label className="text-gray-900 text-sm font-semibold">Status</label>

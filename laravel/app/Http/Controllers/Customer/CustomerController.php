@@ -15,6 +15,7 @@ class CustomerController extends Controller
         return inertia('Customer/Index', [
             'cs' => Auth::user()->hasRole('CS') ? true : false,
             'supervisor' => Auth::user()->hasRole('SUPERVISOR') ? true : false,
+            'developer' => Auth::user()->hasRole('DEVELOPER') ? true : false,
             'offices' => Office::get(),
         ]);
     }

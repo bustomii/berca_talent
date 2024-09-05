@@ -11,6 +11,9 @@ export type PageProps<T extends Record<string, unknown> = Record<string, unknown
     };
     offices: DataOffice[];
     roles: Role[];
+    developer: boolean;
+    supervisor: boolean;
+    cs: boolean;
 };
 
 
