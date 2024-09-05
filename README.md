@@ -17,7 +17,7 @@ go run main.go
 
 
 
-#Laravel 
+# Laravel 
 <!-- how to run project -->
 
 ## How to run project
@@ -43,6 +43,8 @@ npm start
 
 ## user & password
 ```bash
-- Email: bustomi.xcvi@gmail.com
-- Password: 12345678
+- bustomi.xcvi@gmail.com
+```
+```bash
+- 12345678
 ```
