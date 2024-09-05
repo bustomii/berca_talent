@@ -52,7 +52,7 @@ export interface DataUsers {
     created_at:        Date;
     updated_at:        Date;
     password:          string;
-    roles:             Role[] | null;
+    roles:             Role[];
     office:            DataOffice;
 }
 

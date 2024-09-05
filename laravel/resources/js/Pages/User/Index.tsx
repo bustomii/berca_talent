@@ -34,7 +34,7 @@ export default function UsersComponent({ auth, offices, roles }: PageProps) {
             width: "200px"
         },
         {
-            name: 'Roles',
+            name: 'Role',
             selector: 'roles',
             sortable: true,
             width: "200px"
@@ -69,7 +69,6 @@ export default function UsersComponent({ auth, offices, roles }: PageProps) {
         });
     }
 
-
     const GetData = async (url: string) => {
         setIsLoading(true);
         const response = await fetch(url, {
@@ -82,7 +81,14 @@ export default function UsersComponent({ auth, offices, roles }: PageProps) {
 
     const OpenEditModal = (data: DataUsers) => {
         setOpenModal(true);
-        setFormState(data);
+        setFormState({
+            ...data,
+            roles: data.roles.map((role: Role) => {
+                return {
+                    id: role.id
+                } as Role
+            }),
+        });
     }
 
     const setupData = (data: any[]) => {
@@ -198,7 +204,6 @@ export default function UsersComponent({ auth, offices, roles }: PageProps) {
             setErrors(error.response.data.errors);
         });
     }
-
 
     return (
         <AuthenticatedLayout

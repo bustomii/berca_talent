@@ -16,6 +16,10 @@ return Application::configure(basePath: dirname(__DIR__))
             \Illuminate\Http\Middleware\AddLinkHeadersForPreloadedAssets::class,
         ]);
 
+        $middleware->group('access.pages', [
+            \App\Http\Middleware\AccessPages::class,
+        ]);
+
         //
     })
     ->withExceptions(function (Exceptions $exceptions) {
