@@ -32,12 +32,12 @@ php artisan serve
 - GET /address/subdistrict/{district}
 
 
-#React
+# Build React Inertia
 <!-- how to run project -->
 
 ## How to run project
 ```bash
-npm start
+npm run build
 ```
 
 
