@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
+use App\Models\User;
 
 class LoginRequest extends FormRequest
 {
@@ -59,13 +60,21 @@ class LoginRequest extends FormRequest
      */
     public function ensureIsNotRateLimited(): void
     {
-        if (! RateLimiter::tooManyAttempts($this->throttleKey(), 5)) {
+        if (!RateLimiter::tooManyAttempts($this->throttleKey(), 3)) {
+            $cekIsLocked = User::where('email', $this->string('email'))->first();
+            if ($cekIsLocked && $cekIsLocked->is_locked == 1) {
+                throw ValidationException::withMessages([
+                    'email' => 'Your account is locked. Please contact the administrator.',
+                ]);
+            }
+
             return;
         }
 
         event(new Lockout($this));
 
         $seconds = RateLimiter::availableIn($this->throttleKey());
+        $is_locked = User::where('email', $this->string('email'))->update(['is_locked' => 1]);
 
         throw ValidationException::withMessages([
             'email' => trans('auth.throttle', [
