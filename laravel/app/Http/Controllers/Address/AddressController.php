@@ -30,4 +30,11 @@ class AddressController extends Controller
 
         return $data;
     }
+
+    public function subdistrict($district)
+    {
+        $data = DB::table('subdistricts')->where('district_id', $district)->get();
+
+        return $data;
+    }
 }

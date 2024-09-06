@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Customer;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Office;
+use Illuminate\Support\Facades\Mail;
 
 class CustomerController extends Controller
 {
@@ -54,6 +55,16 @@ class CustomerController extends Controller
         ]);
 
         $customer->update($request->all());
+
+        if($request->status == 'Disetujui') {
+            $data = [
+                'nominal' => $customer->deposit_nominal,
+                'name' => $customer->name,
+                'status' => $customer->status,
+            ];
+            
+            Mail::mailer('smtp')->to('bustomi.xcvi@gmail.com')->send(new MailSupervisor($data));
+        }
 
         return response()->json(['message' => 'Updated!']);
     }
